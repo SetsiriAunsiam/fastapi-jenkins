@@ -11,16 +11,21 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/SetsiriAunsiam/fastapi-jenkins.git'
             }
         }
-        stage('Install Dependencies') {
+        stage('Setup venv') {
             steps {
-                sh 'pip install --upgrade pip'
-                sh 'pip install -r requirements.txt'
-                sh 'pip install sonar-scanner coverage'
+                sh '''
+                python3 -m venv venv
+                . venv/bin/activate
+                pip install --upgrade pip
+                pip install -r requirements.txt
+                '''
             }
         }
         stage('Run Tests & Coverage') {
             steps {
-                sh 'pytest --cov=app tests/'
+                sh '''
+                venv/bin/pytest --maxfail=1 --disable-warnings -q --cov=app --cov-report=xml
+                '''
             }
         }
         stage('SonarQube Analysis') {
