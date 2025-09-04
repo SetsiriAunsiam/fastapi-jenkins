@@ -16,7 +16,7 @@ def test_root():
 def test_average_success():
     response = client.get("/average?numbers=10&numbers=20&numbers=30")
     assert response.status_code == 200
-    assert response.json()["average"] == 20.0
+    assert response.json()["average"] == 20
 
 
 def test_average_empty_list():
