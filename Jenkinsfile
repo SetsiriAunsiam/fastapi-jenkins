@@ -62,8 +62,8 @@ pipeline {
             steps {
                 sh '''
                 apt-get update
-                apt-get install -y --no-install-recommends docker.io
-                docker --version
+                apt-get install -y --no-install-recommends docker-cli
+                which docker && docker --version
                 '''
             }
         }
