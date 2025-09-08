@@ -21,6 +21,7 @@ pipeline {
                 . venv/bin/activate
                 pip install --upgrade pip
                 pip install -r requirements.txt
+                pip install pytest-cov coverage || true
                 '''
             }
         }
@@ -38,7 +39,7 @@ pipeline {
                     sh """
                     ${scannerHome}/bin/sonar-scanner \
                     -Dsonar.projectKey=fastapi-app \
-                    -Dsonar.projectName=fastapi app \
+                    -Dsonar.projectName='fastapi app' \
                     -Dsonar.sources=./app \
                     -Dsonar.token=$SONARQUBE
                     """
