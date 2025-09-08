@@ -18,6 +18,7 @@ pipeline {
             steps {
                 sh '''
                 python3 -m venv venv
+                . venv/bin/activate
                 pip install --upgrade pip
                 pip install -r requirements.txt
                 '''
@@ -26,8 +27,7 @@ pipeline {
         stage('Run Tests & Coverage') {
             steps {
                 sh '''
-                pytest --cov=app tests/ --cov-report=xml
-                pytest tests/
+                pytest --cov=app tests/
                 '''
             }
         }
