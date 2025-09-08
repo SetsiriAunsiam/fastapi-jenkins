@@ -27,7 +27,7 @@ pipeline {
         stage('Run Tests & Coverage') {
             steps {
                 sh '''
-                pytest --cov=app tests/
+                venv/bin/pytest --cov=app tests/
                 '''
             }
         }
