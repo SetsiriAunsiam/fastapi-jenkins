@@ -23,7 +23,7 @@ pipeline {
                 '''
             }
         }
-        stage('Install Dependencies') {
+        stage('Setup venv') {
             steps {
                 sh '''
                 python3 -m venv venv
