@@ -2,12 +2,12 @@ pipeline {
     agent {
         docker {
             image 'python:3.11'
-            args  '-u root -v /var/run/docker.sock:/var/run/docker.sock'
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
-    environment {
-        SONARQUBE = credentials('sonar-token')
-    }
+    // environment {
+    //     SONARQUBE = credentials('sonar-token')
+    // }
     stages {
         stage('Checkout') {
             steps {
@@ -27,7 +27,8 @@ pipeline {
         stage('Run Tests & Coverage') {
             steps {
                 sh '''
-                venv/bin/pytest --cov=app tests/ --cov-report=xml
+                pytest --cov=app tests/ --cov-report=xml
+                pytest tests/
                 '''
             }
         }
