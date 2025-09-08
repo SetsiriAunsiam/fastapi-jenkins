@@ -36,7 +36,7 @@ pipeline {
             steps {
                 script {
                     def scannerHome = tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-                    withSonarQubeEnv('Sonarqube') {
+                    withSonarQubeEnv('SonarQube') {
                         sh """
                         ${scannerHome}/bin/sonar-scanner \
                         -Dsonar.projectKey=fastapi-app \
