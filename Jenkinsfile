@@ -35,14 +35,17 @@ pipeline {
         }
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh """
-                    ${scannerHome}/bin/sonar-scanner \
-                    -Dsonar.projectKey=fastapi-app \
-                    -Dsonar.projectName='fastapi app' \
-                    -Dsonar.sources=./app \
-                    -Dsonar.token=$SONARQUBE
-                    """
+                script {
+                    def scannerHome = tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                    withSonarQubeEnv('SonarQube') {
+                        sh """
+                        ${scannerHome}/bin/sonar-scanner \
+                        -Dsonar.projectKey=fastapi-app \
+                        -Dsonar.projectName='fastapi app' \
+                        -Dsonar.sources=./app \
+                        -Dsonar.token=$SONARQUBE
+                        """
+                    }
                 }
             }    
         }
