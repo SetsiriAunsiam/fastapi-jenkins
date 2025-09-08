@@ -27,6 +27,7 @@ pipeline {
         stage('Run Tests & Coverage') {
             steps {
                 sh '''
+                . venv/bin/activate
                 pytest --cov=app tests/ --cov-report=xml
                 pytest tests/
                 '''
