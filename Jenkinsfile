@@ -27,7 +27,8 @@ pipeline {
         stage('Run Tests & Coverage') {
             steps {
                 sh '''
-                venv/bin/pytest --maxfail=1 --disable-warnings -q --cov=app --cov-report=xml
+                pytest --cov=app tests/ --cov-report=xml
+                pytest tests/
                 '''
             }
         }
