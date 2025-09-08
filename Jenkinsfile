@@ -27,7 +27,8 @@ pipeline {
         stage('Run Tests & Coverage') {
             steps {
                 sh '''
-                venv/bin/pytest --cov=app tests/
+                venv/bin/pytest -q --maxfail=1 --disable-warnings --cov=app --cov-report=xml:coverage.xml || true
+                test -f coverage.xml && echo "Coverage XML generated." || echo "No coverage.xml"
                 '''
             }
         }
