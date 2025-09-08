@@ -18,7 +18,7 @@ pipeline {
             steps {
                 sh '''
                 apt-get update
-                apt-get install -y --no-install-recommends openjdk-17-jre-headless ca-certificates
+                apt-get install -y --no-install-recommends default-jre-headless ca-certificates
                 java -version
                 '''
             }
