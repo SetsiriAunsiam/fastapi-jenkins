@@ -5,9 +5,9 @@ pipeline {
             args '-v /var/run/docker.sock:/var/run/docker.sock --user root'
         }
     }
-    // environment {
-    //     SONARQUBE = credentials('sonar-token')
-    // }
+    environment {
+        SONARQUBE = credentials('sonar-token')
+    }
     stages {
         stage('Checkout') {
             steps {
