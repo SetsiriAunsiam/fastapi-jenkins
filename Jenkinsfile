@@ -14,6 +14,15 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/SetsiriAunsiam/fastapi-jenkins.git'
             }
         }
+        stage('System deps for SonarScanner') {
+            steps {
+                sh '''
+                apt-get update
+                apt-get install -y --no-install-recommends openjdk-17-jre-headless ca-certificates
+                java -version
+                '''
+            }
+        }
         stage('Setup venv') {
             steps {
                 sh '''
